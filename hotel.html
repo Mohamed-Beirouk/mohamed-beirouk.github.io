@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Booking Modal</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+  <style>
+    /* Styles for the modal */
+    .modal-dialog {
+      margin-top: 10%;
+    }
+  </style>
+</head>
+<body>
+  
+  <input type="text" id="booking-input" class="form-control" placeholder="Click here to book">
+
+  <div id="booking-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="booking-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="booking-modal-label">Booking Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number:</label>
+              <input type="text" id="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="date-range">Date Range:</label>
+              <input type="text" id="date-range" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Book</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Open the modal when the input is clicked
+      $("#booking-input").click(function() {
+        $("#booking-modal").modal("show");
+      });
+      var currentDate = moment().format("YYYY-MM-DD");
+
+      // Initialize the date range picker
+      $("#date-range").daterangepicker({
+        opens: "center",
+        drops: "up",
+        minDate: currentDate
+      });
+
+      // Close the modal when the form is submitted
+      $("form").submit(function(event) {
+        event.preventDefault();
+        $("#booking-modal").modal("hide");
+        // You can handle the form submission here
+      });
+    });
+  </script>
+</body>
+</html>
